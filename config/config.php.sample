@@ -1,0 +1,27 @@
+<?php
+
+return [
+
+  // App Dirs
+  'imgDir'  => 'resources/img',
+  'tvdbDir' => '/TVDB',
+
+  //Database Config
+  'db_config' => [
+    'dbname'    => 'dbname',
+    'user'      => 'dbuser',
+    'password'  => 'dbpass',
+    'host'      => 'dbhost',
+    'driver'    => 'pdo_mysql'
+  ],
+
+  //TVDB API Config
+  'tvdb_config' => [
+    'username'  => 'jfrs506zo',
+    'userkey'   => '17MSCXAHS7FO09C5',
+    'apikey'    => 'LENC7CQ2WUH4PB87',
+    'bannerUrl' => 'https://www.thetvdb.com/banners'
+  ]
+];
+
+?>

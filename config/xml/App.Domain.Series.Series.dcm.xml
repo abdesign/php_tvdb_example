@@ -1,0 +1,65 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                    http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity name="App\Domain\Series\Series" table="series" repository-class="App\Domain\Series\SeriesRepository">
+      <indexes>
+          <index name="series_name_idx" columns="series_name"/>
+      </indexes>
+      <id name="id" type="integer" column="id">
+          <generator strategy="AUTO"/>
+      </id>
+      <field name="tvdbId" column="tvdb_id" type="integer" nullable="false" unique="true">
+        <options>
+          <option name="comment">The original series id from TheTVDB</option>
+        </options>
+      </field>
+      <field name="imdbId" column="imdb_id" type="string" length="255" nullable="true" unique="false">
+        <options>
+          <option name="comment">IMDB ID of the Series</option>
+        </options>
+      </field>
+      <field name="seriesName" column="series_name" type="string" length="255" nullable="false" unique="false">
+        <options>
+          <option name="comment">Title of the series</option>
+        </options>
+      </field>
+      <field name="network" column="network" type="string" length="255" nullable="true" unique="false">
+        <options>
+          <option name="comment">Name of the Network the Series Aired On</option>
+        </options>
+      </field>
+      <field name="overview" type="text" nullable="true" unique="false">
+        <options>
+          <option name="comment">The long description/overview of the series</option>
+        </options>
+      </field>
+      <field name="image" type="string" length="255" nullable="true" unique="false">
+        <options>
+          <option name="comment">The poster image for the series</option>
+        </options>
+      </field>
+      <field name="thumbnail" type="string" length="255" nullable="true" unique="false">
+        <options>
+          <option name="comment">A thumbnail of the poster image for the series</option>
+        </options>
+      </field>
+      <one-to-many field="episodes" target-entity="App\Domain\Episode\Episode" mapped-by="series">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+            <order-by>
+                <order-by-field name="id" direction="ASC" />
+            </order-by>
+        </one-to-many>
+    </entity>
+
+
+    <mapped-superclass name="App\Domain\Base\BaseEntity">
+        <field name="created" type="datetime" />
+        <field name="updated" type="datetime" />
+    </mapped-superclass>
+
+</doctrine-mapping>

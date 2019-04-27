@@ -1,0 +1,58 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                    http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+  <entity name="App\Domain\Episode\Episode" table="episode" repository-class="App\Domain\Episode\EpisodeRepository">
+      <indexes>
+          <index name="episode_name_idx" columns="episode_name"/>
+      </indexes>
+      <id name="id" type="integer" column="id">
+          <generator strategy="AUTO"/>
+      </id>
+      <field name="tvdbId" column="tvdb_id" type="integer" nullable="false" unique="true">
+        <options>
+          <option name="comment">The original episode id from TheTVDB</option>
+        </options>
+      </field>
+      <field name="seriesId" column="series_id" type="integer" nullable="false" unique="false">
+        <options>
+          <option name="comment">The local id of the series</option>
+        </options>
+      </field>
+      <field name="episodeName" column="episode_name" type="string" length="255" nullable="false" unique="false">
+        <options>
+          <option name="comment">Title of the episode</option>
+        </options>
+      </field>
+      <field name="airedSeason" column="aired_season" type="integer" nullable="false" unique="false">
+        <options>
+          <option name="comment">The season in which the episode aired</option>
+        </options>
+      </field>
+      <field name="airedEpisodeNumber" column="aired_episode_number" type="integer" nullable="false" unique="false">
+        <options>
+          <option name="comment">The episode number</option>
+        </options>
+      </field>
+      <field name="overview" type="text" nullable="true" unique="false">
+        <options>
+          <option name="comment">The long description/overview of the episode</option>
+        </options>
+      </field>
+      <field name="image" type="string" length="255" nullable="true" unique="false">
+        <options>
+          <option name="comment">The image for the episode</option>
+        </options>
+      </field>
+      <many-to-one field="series" target-entity="App\Domain\Series\Series" inversed-by="episodes">
+            <join-column name="series_id" referenced-column-name="id" />
+        </many-to-one>
+    </entity>
+
+    <mapped-superclass name="App\Domain\Base\BaseEntity">
+        <field name="created" type="datetime" />
+        <field name="updated" type="datetime" />
+    </mapped-superclass>
+
+</doctrine-mapping>

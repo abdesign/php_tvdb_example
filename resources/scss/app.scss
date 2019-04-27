@@ -1,0 +1,41 @@
+@import "~bootstrap/scss/bootstrap";
+@import "landing-page";
+
+.series-container
+{
+  margin-top:50px;
+  margin-bottom:50px;
+
+  .series-button{
+    margin-top:15px;
+  }
+}
+
+.episode-container
+{
+  margin-top:50px;
+  .episode-img{
+    margin-top:20px;
+  }
+}
+
+#episode-results, #series-results
+{
+  display:none;
+}
+
+#show-search
+{
+  display:none;
+}
+
+#top
+{
+  padding:8px 0px;
+}
+
+.overlay{
+  opacity:0.8;
+  z-index:100;
+  display: none;
+}
